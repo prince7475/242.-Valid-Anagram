@@ -32,19 +32,20 @@ return true
 
 const isAnagram = (s,t) => {
   let hashMap = {}
+  let totalCount = 0
   for(let letter of t){
     if(!(letter in hashMap)) hashMap[letter] = 0
     hashMap[letter] += 1
+    totalCount++
   }
   
   for(let el of s){
     if(!(el in hashMap) || hashMap[el] === 0) return false
     hashMap[el] -= 1
+    totalCount--
   }
-  for(let key in hashMap){
-    if(hashMap[key] > 0) return false
-  }  
-  return true
+
+  return totalCount === 0
 }
 
 When looping through an object use in
