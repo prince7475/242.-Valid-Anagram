@@ -1,0 +1,50 @@
+Given two strings s and t , write a function to determine if t is an anagram of s.
+
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+Example 2:
+
+Input: s = "rat", t = "car"
+Output: false
+Note:
+You may assume the string contains only lowercase alphabets.
+
+Follow up:
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+--- SODO CODE
+hashMap // Contain t letters and count of each letter
+while (let letter of t){
+  if(!(letter in hashMap)) hashMap[letter] = 0
+  hashMap[letter] += 1
+}
+
+// loop through s
+while (let el of s){
+  if(!(el in hashMap) || (hashMap[el] === 0)) return false
+  hashMap[el] -= 1
+}
+// if we never returned false
+return true
+
+
+const isAnagram = (s,t) => {
+  let hashMap = {}
+  for(let letter of t){
+    if(!(letter in hashMap)) hashMap[letter] = 0
+    hashMap[letter] += 1
+  }
+  
+  for(let el of s){
+    if(!(el in hashMap) || hashMap[el] === 0) return false
+    hashMap[el] -= 1
+  }
+  for(let key in hashMap){
+    if(hashMap[key] > 0) return false
+  }  
+  return true
+}
+
+When looping through an object use in
